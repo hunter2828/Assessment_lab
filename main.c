@@ -31,7 +31,6 @@ scanf("%d", &key);
             {
                 ch = ch - 26;
             }
-            
             message[i] = ch;
         }
         
