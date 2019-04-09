@@ -2,6 +2,10 @@
 
 int main()
 {
+    int key;
+    char ch;
+    printf("Enter key: \n");
+    scanf("%d", &key);
     //Write text to a file, then read it from a file, lecture 9/04 around half hour into lecture recording.
     FILE *input;
     input = fopen("input.txt", "r");
@@ -10,16 +14,16 @@ int main()
 printf("Enter a message to encrypt: \n");// User enters a message which is to be encrypted, and it is stored as a type char, called message
 gets(message);// text stored as variable type char, named message*/
 
-printf("Enter key: \n");
-scanf("%d", &key);
+
 
     /*for (i = 0; message[i] != 0; ++i)//for loop used because it reduces the amount of code that needs to be written, and allows the whole string to be tested for in one loop
     {
         ch = message[i];*/
-        
-       while(feof() != EOF)
+        //int i = 0;
+       while(feof(input) == 0)
+       //while(i < 1)
        {
-        char ch;
+        //i++;
         fscanf(input, "%c", &ch);
         if(ch>= 'a' && ch<= 'z')//if loop to encrypt lower case letters. The loop adds the key to the value, and if the value exceeds the value of lowercase 'z', it initiates another if loop.
         {
@@ -43,7 +47,7 @@ scanf("%d", &key);
         }
         
     }
-    printf("Encrypted Message: %s\n", message);
+    printf("Encrypted Message: %c\n", ch);
 
 
   return 0;
