@@ -2,24 +2,23 @@
 
 int main()
 {
-    int key;
+int m=1;
+printf("Enter 1 for rotation encryption: \n");
+scanf("%d", &m);
+switch(m)
+{
+case 1:
+{
+    int key=1;
     char ch;
-    printf("Enter key: \n");
+    /*printf("Enter key: \n");*/
     scanf("%d", &key);
     //Write text to a file, then read it from a file, lecture 9/04 around half hour into lecture recording.
     FILE *input;
     input = fopen("input.txt", "r");
-// Declared as integers as the key must be an integer and i will be incremented in a loop.
-/*char message[100], ch; //message[100] array allows a message of 100 characters
-printf("Enter a message to encrypt: \n");// User enters a message which is to be encrypted, and it is stored as a type char, called message
-gets(message);// text stored as variable type char, named message*/
 
 
-
-    /*for (i = 0; message[i] != 0; ++i)//for loop used because it reduces the amount of code that needs to be written, and allows the whole string to be tested for in one loop
-    {
-        ch = message[i];*/
-        //int i = 0;
+   
        while(feof(input) == 0)
        //while(i < 1)
        {
@@ -45,11 +44,15 @@ gets(message);// text stored as variable type char, named message*/
             }
             
         }
-        
+        printf("%c", ch);
     }
-    printf("Encrypted Message: %c\n", ch);
 
+}
+   break;
+   
+   default: printf("Something went very wrong");
 
+}
   return 0;
 }
 
