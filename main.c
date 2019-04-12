@@ -11,7 +11,7 @@ printf("Enter 1 for rotation encrytpion\n");
         printf("%d is not between 1 and 5;", m);
     }
 
-switch(m)
+switch(1)
 {
 case 1:
 {
