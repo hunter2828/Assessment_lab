@@ -1,17 +1,19 @@
 #include <stdio.h>
 
 int main()
-{ int m;
+{ int m=0;
 printf("Enter 1 for rotation encrytpion\n");
     printf("Enter 2 for rotation decryption\n");
     printf("Enter 3 for substitution encrytpion\n");
     scanf("%d", &m);
     if(m<1 || m>6)
     {
-        printf("%d is not between 1 and 5;", m);
+        printf("Enter an integer between 1 and 6");
+        scanf("%d", &m);
     }
 
-switch(1)
+    if(m)
+switch(m)
 {
 case 1:
 {
