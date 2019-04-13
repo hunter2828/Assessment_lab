@@ -15,6 +15,7 @@ printf("Enter 1 for rotation encrytpion\n");
     if(m)
 switch(m)
 {
+
 case 1:
 {
     int key=1;
