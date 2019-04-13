@@ -1,5 +1,5 @@
 #include <stdio.h>
-//why won't this stupid shit work pls fuck this stupid shitcfhhsgzbzb
+
 int main()
 { int m=0;
 printf("Enter 1 for rotation encrytpion\n");
