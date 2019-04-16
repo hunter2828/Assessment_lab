@@ -13,7 +13,7 @@ printf("Enter 1 for rotation encrytpion\n");
     }
 
     
-switch(m)
+switch(4)
 {
 
 case 1:
@@ -310,6 +310,195 @@ case 1:
         printf("%c", ch);
     }  
    break;
+   
+   case 4:
+  {
+      int n;
+    FILE *keytsk4;
+    keytsk4 = fopen("keytsk4.txt", "r"); //Opening file with new alphabet string for reading
+    char ch;
+    int fgetc(FILE *keytsk4);
+    char alpha[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};//Plain alphabet string used to help encoding/decoding process
+    for(n = 0; n<26; n++)//Indexes once for each letter
+    {
+        if(feof(keytsk4) == 0)// If the input alphabet file isn't at the end of file, the IF loop commences
+        {
+            alpha[n] = fgetc(keytsk4);/*The first letter of the alpha string becomes the first letter of the string entered in the file, 
+                                          and is repeated until the 26 letter of the alpha string becomes the 26th letter of the inputted string*/    
+        }
+    }
+   
+    FILE *todecrypttsk4; //opening file with text to encrypt
+    todecrypttsk4 = fopen("todecrypttsk4.txt", "r");
+    int fgetc(FILE *todecrypttsk4);
+    while(feof(todecrypttsk4) == 0) // DO NOT USE FP != NULL, WILL CRASH WHILE LOOP
+        {
+              ch = fgetc(todecrypttsk4);/* the char variable is assigned the ascii value of a letter from the code to be decrypted. The fgetc function remembers the 
+                                      position of the previous byte that it allocated to ch and calls the one after everytime it is called.*/ 
+        
+        /* The following IF statements encrypt the character that has been allocated to 'ch'. If 'ch' == A, then it is assigned the new value of alpha[0] and so on. 
+        */
+            if(ch == alpha[0])
+            {
+                ch = 'A';
+                
+            }
+    
+    
+            else if(ch == alpha[1])
+            {
+                ch = 'B';
+                
+            }
+            
+            else if(ch == alpha[2])
+            {
+                ch = 'C';
+                
+            }
+            
+            else if(ch == alpha[3])
+            {
+                ch = 'D';
+                
+            }
+            
+            else if(ch == alpha[4])
+            {
+                ch = 'E';
+                
+            }
+            
+            else if(ch == alpha[5])
+            {
+                ch = 'F';
+                
+            }
+            
+            else if(ch == alpha[6])
+            {
+                ch = 'G';
+                
+            }
+            
+            else if(ch == alpha[7])
+            {
+                ch = 'H';
+                
+            }
+            
+            else if(ch == alpha[8])
+            {
+                ch = 'I';
+                
+            }
+            
+            else if(ch == alpha[9])
+            {
+                ch = 'J';
+                
+            }
+            
+            else if(ch == alpha[10])
+            {
+                ch = 'K';
+                
+            }
+            
+            else if(ch == alpha[11])
+            {
+                ch = 'L';
+                
+            }
+            
+            else if(ch == alpha[12])
+            {
+                ch = 'M';
+                
+            }
+            
+            else if(ch == alpha[13])
+            {
+                ch = 'N';
+                
+            }
+            
+            else if(ch == alpha[14])
+            {
+                ch = 'O';
+                
+            }
+            
+            else if(ch == alpha[15])
+            {
+                ch = 'P';
+                
+            }
+            
+            else if(ch == alpha[16])
+            {
+                ch = 'Q';
+                
+            }
+            
+            else if(ch == alpha[17])
+            {
+                ch = 'R';
+                
+            }
+            
+            else if(ch == alpha[18])
+            {
+                ch = 'S';
+                
+            }
+            
+            else if(ch == alpha[19])
+            {
+                ch = 'T';
+                
+            }
+            
+            else if(ch == alpha[20])
+            {
+                ch = 'U';
+                
+            }
+            
+            else if(ch == alpha[21])
+            {
+                ch = 'V';
+                
+            }
+            
+            else if(ch == alpha[22])
+            {
+                ch = 'W';
+                
+            }
+            
+            else if(ch == alpha[23])
+            {
+                ch = 'X';
+                
+            }
+            
+            else if(ch == alpha[24])
+            {
+                ch = 'Y';
+                
+            }
+            
+            else if(ch == alpha[25])
+            {
+                ch = 'Z';
+                
+            }
+            
+            
+        printf("%c", ch);
+    
+  }
    default: 
    {
        printf("Something went very wrong");
@@ -319,5 +508,6 @@ case 1:
 }
 }
   return 0;
+}
 }
 
