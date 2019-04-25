@@ -14,45 +14,60 @@ if(m>0 && m<6)
 
     case 1:
     {
-        int key=2;
+        int key;
         char ch;
-        /*printf("Enter key: \n");*/
-        scanf("%d", &key);
-        //Write text to a file, then read it from a file, lecture 9/04 around half hour into lecture recording.
-        FILE *input;
-        input = fopen("input.txt", "r");
-    
-    
-       
+    FILE *input;//initialises file pointer 
+        
+         char sentence[200]; //string to store the message in
+         
+        printf("Enter string: \n"); //prompts user to enter sentence
+        getchar();
+        fgets(sentence, 200, stdin); //gets sentence from stdin and stores it as 'sentence'
+        input = fopen("input.txt", "w"); //opens file for writing
+        fputs(sentence, input); //stores 'sentence' in the file
+
+        fclose(input);//closes file
+        input = fopen("input.txt", "r");//opens the file for reading
+        fscanf(input, "%c", &ch); //scans the file for the first char and stores it as ch
+   
+        printf("Enter key: \n");// prompts user to enter key
+        scanf("%d", &key); //stores input as 'key'
+                
+	    printf("%c", sentence[0]+key);//prints the first char of the file and adds the key. This is done as the fgets fucntion was skipping sentence[1].
+
+   
+        
+      
            while(feof(input) == 0)
-           //while(i < 1)
            {
-            //i++;
-            fscanf(input, "%c", &ch);
-            if(ch>= 'a' && ch<= 'z')//if loop to encrypt lower case letters. The loop adds the key to the value, and if the value exceeds the value of lowercase 'z', it initiates another if loop.
-            {
-                ch = ch + key;//a letters ascii code plus the key is assigned to the same variable butwill have a different ascii code
-                if(ch > 'z')//used to encrypt an values that 'overflow' past the ascii value of 'z'
+                fscanf(input, "%c", &ch);
+                if(ch>= 'a' && ch<= 'z')//if loop to encrypt lower case letters. The loop adds the key to the value, and if the value exceeds the value of lowercase 'z', it initiates another if loop.
                 {
-                    ch = ch - 26;//formula encrypts values that overflow past z, by using previous value calculated for the new 'ch' and minuses 26.
+                    ch = ch + key;//a letters ascii code plus the key is assigned to the same variable butwill have a different ascii code
+                    
+                    if(ch > 'z')//used to encrypt an values that 'overflow' past the ascii value of 'z'
+                    {
+                        ch = ch - 26;//formula encrypts values that overflow past z, by using previous value calculated for the new 'ch' and minuses 26.
+                    }
+                    
+                    
                 }
                 
-                
-            }
-            
-            else if(ch>= 'A' && ch<= 'Z')//if loop to encrypt lower case letters. The loop adds the key to the value, and if the value exceeds the value of uppercase 'Z' it initiates another loop
-            {
-                ch = ch + key;//a letters ascii code plus the key is assigned to the same variable butwill have a different ascii code
-                if(ch > 'Z')//used to encrypt an values that 'overflow' past the ascii value of 'Z'
+                else if(ch>= 'A' && ch<= 'Z')//if loop to encrypt lower case letters. The loop adds the key to the value, and if the value exceeds the value of uppercase 'Z' it initiates another loop
                 {
-                    ch = ch - 26;
+                    ch = ch + key;//a letters ascii code plus the key is assigned to the same variable butwill have a different ascii code
+                    
+                    if(ch > 'Z')//used to encrypt an values that 'overflow' past the ascii value of 'Z'
+                    {
+                        ch = ch - 26;
+                    }
+                    
                 }
-                
-            }
             printf("%c", ch);
            }
+}
+
     
-    }
        break;
        case 2:
        {
@@ -304,7 +319,9 @@ if(m>0 && m<6)
                     
                 }
             printf("%c", ch);
-        }  
+        }
+}
+
        break;
        
        case 4:
@@ -503,8 +520,7 @@ if(m>0 && m<6)
 
 }
 }
-}
-}  
+} 
 
 else 
     {
