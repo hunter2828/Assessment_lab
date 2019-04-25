@@ -125,27 +125,42 @@ if(m>0 && m<6)
        break;
        case 3:       
     {
-        int n;
-        FILE *inputtsk3;
-        inputtsk3 = fopen("inputtsk3.txt", "r"); //Opening file with new alphabet string for reading
+       int n;
+     char subalpha[27];
+     FILE *key;
+     printf("Enter substitution string: ");
+     fgets(subalpha, 27, stdin);
+     key = fopen("key.txt", "w");
+     fputs(subalpha, key);
+     fclose(key);
+     
+     key = fopen("key.txt", "r");
+     
+        
         char ch;
-        int fgetc(FILE *inputtsk3);
+        int fgetc(FILE *key);
         char alpha[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};//Plain alphabet string used to help encoding/decoding process
         for(n = 0; n<26; n++)//Indexes once for each letter
         {
-            if(feof(inputtsk3) == 0)// If the input alphabet file isn't at the end of file, the IF loop commences
+            if(feof(key) == 0)// If the todecrypt5 alphabet file isn't at the end of file, the IF loop commences
             {
-                alpha[n] = fgetc(inputtsk3);/*The first letter of the alpha string becomes the first letter of the string entered in the file, 
-                                              and is repeated until the 26 letter of the alpha string becomes the 26th letter of the inputted string*/    
+                alpha[n] = fgetc(key);/*The first letter of the alpha string becomes the first letter of the string entered in the file, 
+                                              and is repeated until the 26 letter of the alpha string becomes the 26th letter of the todecrypt5ted string*/    
             }
         }
-       
-        FILE *tsk3orig; //opening file with text to encrypt
-        tsk3orig = fopen("tsk3orig.txt", "r");
-        int fgetc(FILE *tsk3orig);
-        while(feof(tsk3orig) == 0) // DO NOT USE FP != NULL, WILL CRASH WHILE LOOP
+        char subencrypt[200];
+        FILE *todecrypt5; //opening file with text to encrypt
+        printf("Enter text to encrypt: ");
+        getchar();
+        fgets(subencrypt, 200, stdin);
+        todecrypt5 = fopen("todecrypt5.txt", "w");
+        fputs(subencrypt, todecrypt5);
+        fclose(todecrypt5);
+        todecrypt5 = fopen("todecrypt5.txt", "r");
+        int fgetc(FILE *todecrypt);
+        while(feof(todecrypt5) == 0) // DO NOT USE FP != NULL, WILL CRASH WHILE LOOP
             {
-                  ch = fgetc(tsk3orig);/* the char variable is assigned the ascii value of a letter from the code to be decrypted. The fgetc function remembers the 
+                  ch = fgetc(todecrypt5);/* the char variable is assigned the ascii value of a letter from the code to be decrypted. The fgetc function remembers the 
                                           position of the previous byte that it allocated to ch and calls the one after everytime it is called.*/ 
             
             /* The following IF statements encrypt the character that has been allocated to 'ch'. If 'ch' == A, then it is assigned the new value of alpha[0] and so on. 
@@ -332,6 +347,10 @@ if(m>0 && m<6)
                 }
             printf("%c", ch);
         }
+    
+
+  
+        
 }
 
        break;
