@@ -1,7 +1,7 @@
 #include <stdio.h>
-
+//This program consists of 4 algorithms, which derypt and encrypt messages using rotation and substitution ciphers
 int main(){
-    int m;
+    int m;// Global variable used once for task selection but not used again. All other variables are declared within the switch cases
     //Menu 
     printf("Enter 1 for rotation encrytpion\n");
     printf("Enter 2 for rotation decryption\n");
@@ -11,7 +11,7 @@ int main(){
 if(m<0 || m>5)// used to ensure that user imputs correct keys
         {
             printf("Enter an integer, 1-4:\n");
-            scanf("%d", &m);
+            scanf("%d", &m);//reassigns the new entered value to 'm'
         }
     
 else
@@ -165,7 +165,7 @@ else
             }
         char subencrypt[200];//string of 200 characters is used to store the message
         FILE *todecrypt5; //opening file with text to encrypt
-        printf("Enter text to encrypt: ");
+        printf("Enter text to encrypt: ");//prompts user to enter message
         getchar();//is used as the enter character used to select task 3 is used as the input instead of the actual input. This means that the compiler will 
         //not read the input and skip it. The getchar() function simply 'eats' the enter character and allows for input
         fgets(subencrypt, 200, stdin);//Gets inputted message and stores it in string subencrypt[200]
@@ -413,7 +413,7 @@ else
             todecrypttsk4 = fopen("todecrypttsk4.txt", "r");//file opened for reading
             int fgetc(FILE *todecrypttsk4); //initialising fgetc function with file pointer
             
-            while(feof(todecrypttsk4) == 0) // DO NOT USE FP != NULL, WILL CRASH WHILE LOOP
+            while(feof(todecrypttsk4) == 0) // DO NOT USE FP != NULL, WILL CRASH WHILE LOOP. while file has not reached null character, while loop continues to execute
                 {
                     ch = fgetc(todecrypttsk4);/* the char variable is assigned the ascii value of a letter from the code to be decrypted. The fgetc function remembers the 
                                                   position of the previous byte that it allocated to ch and calls the one after everytime it is called.*/ 
@@ -581,7 +581,7 @@ else
                 printf("%c", ch);
             
             }
-            default: 
+            default: //used just incase something goes wrong
                {
                    printf("Something went very wrong");
                }
