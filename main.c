@@ -40,7 +40,7 @@ else
        
             printf("Enter key: \n");// prompts user to enter key
             scanf("%d", &key); //stores input as 'key'
-                    
+            printf("Encrypted Message: ");       
     	    printf("%c", sentence[0]+key);//prints the first char of the file and adds the key. This is done as the fgets fucntion was skipping sentence[1]. 
           
             while(feof(input) == 0)//while the file has not reached its null value
@@ -96,9 +96,9 @@ else
        
             printf("Enter key: \n");// prompts user to enter key
             scanf("%d", &key); //stores input as 'key'
-            
+            printf("Decrypted Message: ");
             ovrflw = sentence[0]-key;
-            if(ovrflw < 'a')
+            if(ovrflw < 'A')
              {
                         ovrflw = ovrflw + 26;//formula encrypts values that overflow past z, by using previous value calculated for the new 'ch' and minuses 26.
                     }
@@ -174,6 +174,7 @@ else
         fclose(todecrypt5);//closes file so that it can be reopened for reading
         todecrypt5 = fopen("todecrypt5.txt", "r");//file opened for reading
         int fgetc(FILE *todecrypt); //initialising fgetc function with file pointer
+        printf("Encrypted Message: ");
         while(feof(todecrypt5) == 0) // DO NOT USE FP != NULL, WILL CRASH WHILE LOOP
             {
                 ch = fgetc(todecrypt5);/* the char variable is assigned the ascii value of a letter from the code to be decrypted. The fgetc function remembers the 
@@ -412,7 +413,7 @@ else
             fclose(todecrypttsk4);//closes file so that it can be reopened for reading
             todecrypttsk4 = fopen("todecrypttsk4.txt", "r");//file opened for reading
             int fgetc(FILE *todecrypttsk4); //initialising fgetc function with file pointer
-            
+            printf("Decrypted Message: ");
             while(feof(todecrypttsk4) == 0) // DO NOT USE FP != NULL, WILL CRASH WHILE LOOP. while file has not reached null character, while loop continues to execute
                 {
                     ch = fgetc(todecrypttsk4);/* the char variable is assigned the ascii value of a letter from the code to be decrypted. The fgetc function remembers the 
