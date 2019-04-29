@@ -2,19 +2,26 @@
 
 int main(){
     int m;
+    //Menu 
     printf("Enter 1 for rotation encrytpion\n");
     printf("Enter 2 for rotation decryption\n");
     printf("Enter 3 for substitution encrytpion\n");
     printf("Enter 4 for substitution decrytpion\n");
-    scanf("%d", &m);
+    scanf("%d", &m);//stores users input as m
+if(m<0 || m>5)// used to ensure that user imputs correct keys
+        {
+            printf("Enter an integer, 1-4:\n");
+            scanf("%d", &m);
+        }
     
-if(m>0 && m<6)
+else
 {
-    switch(m)
+    switch(m)//users choice of algorithm was stored as 'm' and this value is used in a switch case to call correct program
     {
 
         case 1:
         {
+            //Encryption using alphabet rotation with known key
             int key;
             char ch;
             FILE *input;//initialises file pointer 
@@ -22,7 +29,7 @@ if(m>0 && m<6)
             char sentence[200]; //string to store the message in
              
             printf("Enter string: \n"); //prompts user to enter sentence
-            getchar();
+            getchar(); //this 'deletes' the last char entered, which was a space key. If this is not implemented, then the compiler uses an entrer character as the message input
             fgets(sentence, 200, stdin); //gets sentence from stdin and stores it as 'sentence'
             input = fopen("input.txt", "w"); //opens file for writing
             fputs(sentence, input); //stores 'sentence' in the file
@@ -36,9 +43,9 @@ if(m>0 && m<6)
                     
     	    printf("%c", sentence[0]+key);//prints the first char of the file and adds the key. This is done as the fgets fucntion was skipping sentence[1]. 
           
-            while(feof(input) == 0)
+            while(feof(input) == 0)//while the file has not reached its null value
                {
-                    fscanf(input, "%c", &ch);
+                    fscanf(input, "%c", &ch);//scans file 'input' and stores it as ch
                     if(ch>= 'a' && ch<= 'z')//if loop to encrypt lower case letters. The loop adds the key to the value, and if the value exceeds the value of lowercase 'z', it initiates another if loop.
                     {
                         ch = ch + key;//a letters ascii code plus the key is assigned to the same variable butwill have a different ascii code
@@ -61,22 +68,24 @@ if(m>0 && m<6)
                         }
                         
                     }
-                printf("%c", ch);
+                printf("%c", ch); //prints new encrypt value
                }
     }
     
         
            break;
            case 2:
+           //Decryption of rotation cipher with known key
            {
             int key;
             char ch;
+            char ovrflw;
             FILE *input;//initialises file pointer 
             
             char sentence[200]; //string to store the message in
              
             printf("Enter encoded text: \n"); //prompts user to enter sentence
-            getchar();
+            getchar(); //this 'deletes' the last char entered, which was a space key. If this is not implemented, then the compiler uses an entrer character as the message input
             fgets(sentence, 200, stdin); //gets sentence from stdin and stores it as 'sentence'
             input = fopen("input.txt", "w"); //opens filefor writing
             fputs(sentence, input); //stores 'sentence' in the file
@@ -87,15 +96,20 @@ if(m>0 && m<6)
        
             printf("Enter key: \n");// prompts user to enter key
             scanf("%d", &key); //stores input as 'key'
-                    
-    	    printf("%c", sentence[0]-key);//prints the first char of the file and adds the key. This is done as the fgets fucntion was skipping sentence[1].
+            
+            ovrflw = sentence[0]-key;
+            if(ovrflw < 'a')
+             {
+                        ovrflw = ovrflw + 26;//formula encrypts values that overflow past z, by using previous value calculated for the new 'ch' and minuses 26.
+                    }
+    	    printf("%c", ovrflw);//prints the first char of the file and adds the key. This is done as the fgets fucntion was skipping sentence[1].
     
          
            
-               while(feof(input) == 0)
-               //while(i < 1)
+               while(feof(input) == 0)//while the end of the file has not been reached
+               
                {
-                fscanf(input, "%c", &ch);
+                fscanf(input, "%c", &ch);//storing first character of input as ch
                 if(ch>= 'a' && ch<= 'z')//if loop to encrypt lower case letters. The loop adds the key to the value, and if the value exceeds the value of lowercase 'z', it initiates another if loop.
                 {
                     ch = ch - key;//a letters ascii code plus the key is assigned to the same variable butwill have a different ascii code
@@ -124,24 +138,24 @@ if(m>0 && m<6)
            case 3:  
            //This algorithm reads text from input and stores it in a file for reading. It encrypts a message using a substituion cipher.
         {
-           int n;//used for incrementation in for loop
-         char subalpha[27];//this string will store the substitution key
-         FILE *key; //file pointer for the file with the key in it
-         printf("Enter substitution alphabet string, in capitals, with no spaces or characters other than letters: ");//prompts user to enter alphabet substitution
-         getchar();//is used as the enter character is used to select task 3 is used as the input instead of the actual input. This means that the compiler will 
-         //not read the input and skip straight to the Ënter text to encrypt" section below. The getchar() function simply 'eats' the enter character and allows for input
-         fgets(subalpha, 27, stdin); //gets input from standard input and stores in string subalpha[27].
-         key = fopen("key.txt", "w");//opening file for writing
-         fputs(subalpha, key);//puts the string subalpha in the file 'key'
-         fclose(key); //closes file as it has to be reopened differently to do reading
+        int n;//used for incrementation in for loop
+        char subalpha[27];//this string will store the substitution key
+        FILE *key; //file pointer for the file with the key in it
+        printf("Enter substitution alphabet string you would like to useto encrypt the messsage, in capitals, with no spaces or characters other than letters: ");//prompts user to enter alphabet substitution
+        getchar();//is used as the enter character is used to select task 3 is used as the input instead of the actual input. This means that the compiler will 
+        //not read the input and skip straight to the Ënter text to encrypt" section below. The getchar() function simply 'eats' the enter character and allows for input
+        fgets(subalpha, 27, stdin); //gets input from standard input and stores in string subalpha[27].
+        key = fopen("key.txt", "w");//opening file for writing
+        fputs(subalpha, key);//puts the string subalpha in the file 'key'
+        fclose(key); //closes file as it has to be reopened differently to do reading
          
-         key = fopen("key.txt", "r"); //opening key file for reading
+        key = fopen("key.txt", "r"); //opening key file for reading
          
             
-            char ch;
-            int fgetc(FILE *key); //initialising fgetc function with file pointer
-            char alpha[27] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};//Plain alphabet string used to help encoding/decoding process
-            for(n = 0; n<26; n++)//Indexes once for each letter
+        char ch;
+        int fgetc(FILE *key); //initialising fgetc function with file pointer
+        char alpha[27] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};//Plain alphabet string used to help encoding/decoding process
+        for(n = 0; n<26; n++)//Indexes once for each letter
             {
                 if(feof(key) == 0)//If the todecrypt5 alphabet file isn't at the end of file, the IF loop commences
                 {
@@ -149,20 +163,20 @@ if(m>0 && m<6)
                                                   and is repeated until the 26 letter of the alpha string becomes the 26th letter of the todecrypt5ted string*/    
                 }
             }
-            char subencrypt[200];//string of 200 characters is used to store the message
-            FILE *todecrypt5; //opening file with text to encrypt
-            printf("Enter text to encrypt: ");
-            getchar();//is used as the enter character used to select task 3 is used as the input instead of the actual input. This means that the compiler will 
-         //not read the input and skip it. The getchar() function simply 'eats' the enter character and allows for input
-            fgets(subencrypt, 200, stdin);//Gets inputted message and stores it in string subencrypt[200]
-            todecrypt5 = fopen("todecrypt5.txt", "w"); //opens file for reading
-            fputs(subencrypt, todecrypt5);//puts subencrypt[200] into file 'todecrypt5'
-            fclose(todecrypt5);//closes file so that it can be reopened for reading
-            todecrypt5 = fopen("todecrypt5.txt", "r");//file opened for reading
-            int fgetc(FILE *todecrypt); //initialising fgetc function with file pointer
-            while(feof(todecrypt5) == 0) // DO NOT USE FP != NULL, WILL CRASH WHILE LOOP
-                {
-                      ch = fgetc(todecrypt5);/* the char variable is assigned the ascii value of a letter from the code to be decrypted. The fgetc function remembers the 
+        char subencrypt[200];//string of 200 characters is used to store the message
+        FILE *todecrypt5; //opening file with text to encrypt
+        printf("Enter text to encrypt: ");
+        getchar();//is used as the enter character used to select task 3 is used as the input instead of the actual input. This means that the compiler will 
+        //not read the input and skip it. The getchar() function simply 'eats' the enter character and allows for input
+        fgets(subencrypt, 200, stdin);//Gets inputted message and stores it in string subencrypt[200]
+        todecrypt5 = fopen("todecrypt5.txt", "w"); //opens file for reading
+        fputs(subencrypt, todecrypt5);//puts subencrypt[200] into file 'todecrypt5'
+        fclose(todecrypt5);//closes file so that it can be reopened for reading
+        todecrypt5 = fopen("todecrypt5.txt", "r");//file opened for reading
+        int fgetc(FILE *todecrypt); //initialising fgetc function with file pointer
+        while(feof(todecrypt5) == 0) // DO NOT USE FP != NULL, WILL CRASH WHILE LOOP
+            {
+                ch = fgetc(todecrypt5);/* the char variable is assigned the ascii value of a letter from the code to be decrypted. The fgetc function remembers the 
                                               position of the previous byte that it allocated to ch and calls the one after everytime it is called.*/ 
                 
                 /* The following IF statements encrypt the character that has been allocated to 'ch'. If 'ch' == A, then it is assigned the new value of alpha[0] and so on. 
@@ -394,10 +408,11 @@ if(m>0 && m<6)
             //not read the input and skip it. The getchar() function simply 'eats' the enter character and allows for input
             fgets(subdecrypt, 200, stdin);//Gets inputted message and stores it in string subencrypt[200]
             todecrypttsk4 = fopen("todecrypttsk4.txt", "w"); //opens file for reading
-            fputs(subdecrypt, todecrypttsk4);//puts subDEcrypt[200] into file 'todecrypt5'
+            fputs(subdecrypt, todecrypttsk4);//puts subdecrypt[200] into file 'todecrypt5'
             fclose(todecrypttsk4);//closes file so that it can be reopened for reading
             todecrypttsk4 = fopen("todecrypttsk4.txt", "r");//file opened for reading
             int fgetc(FILE *todecrypttsk4); //initialising fgetc function with file pointer
+            
             while(feof(todecrypttsk4) == 0) // DO NOT USE FP != NULL, WILL CRASH WHILE LOOP
                 {
                     ch = fgetc(todecrypttsk4);/* the char variable is assigned the ascii value of a letter from the code to be decrypted. The fgetc function remembers the 
@@ -565,22 +580,17 @@ if(m>0 && m<6)
                     
                 printf("%c", ch);
             
-          }
-           default: 
-           {
-               printf("Something went very wrong");
-           }
-       
+            }
+            default: 
+               {
+                   printf("Something went very wrong");
+               }
+           
     
+        }   
     }
-    }
-    } 
+} 
     
-    else 
-        {
-            printf("Enter an integer between 1 and 6\n");
-            scanf("%d", &m);
-        }
-
+    
   return 0;
 }
